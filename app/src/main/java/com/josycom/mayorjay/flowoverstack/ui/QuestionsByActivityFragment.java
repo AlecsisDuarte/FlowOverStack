@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,6 +28,8 @@ import com.josycom.mayorjay.flowoverstack.viewmodel.CustomQuestionViewModelFacto
 import com.josycom.mayorjay.flowoverstack.viewmodel.QuestionViewModel;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 import static com.josycom.mayorjay.flowoverstack.util.StringConstants.EXTRA_AVATAR_ADDRESS;
 import static com.josycom.mayorjay.flowoverstack.util.StringConstants.EXTRA_QUESTION_ANSWERS_COUNT;
@@ -54,8 +58,6 @@ public class QuestionsByActivityFragment extends Fragment {
         mFragmentQuestionsByActivityBinding.activitySwipeContainer.setColorSchemeResources(R.color.colorPrimaryLight);
         mFragmentQuestionsByActivityBinding.activityScrollUpFab.setVisibility(View.INVISIBLE);
 
-        //mFragmentQuestionsByActivityBinding.tvActiveQuestions.setText("Active Questions");
-        //String fragHeaderText;
         mSortString = StringConstants.SORT_BY_ACTIVITY;
         if (getArguments() != null) {
             String fragHeaderText;
@@ -105,18 +107,31 @@ public class QuestionsByActivityFragment extends Fragment {
             assert currentQuestion != null;
             Owner questionOwner = currentQuestion.getOwner();
 
+            Bundle arg = new Bundle();
+            arg.putString(EXTRA_QUESTION_TITLE, currentQuestion.getTitle());
+            arg.putString(EXTRA_QUESTION_NAME, questionOwner.getDisplayName());
+            arg.putString(EXTRA_QUESTION_DATE,
+                    DateUtil.toNormalDate(currentQuestion.getCreationDate()));
+            arg.putString(EXTRA_QUESTION_FULL_TEXT, currentQuestion.getBody());
+            arg.putString(EXTRA_AVATAR_ADDRESS, questionOwner.getProfileImage());
+            arg.putInt(EXTRA_QUESTION_ID, currentQuestion.getQuestionId());
+            arg.putInt(EXTRA_QUESTION_VOTES_COUNT, currentQuestion.getScore());
+            arg.putString(EXTRA_QUESTION_OWNER_LINK, questionOwner.getLink());
+            NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
+            navController.navigate(R.id.answer_dest, arg);
+
             answerActivityIntent.putExtra(EXTRA_QUESTION_TITLE, currentQuestion.getTitle());
             answerActivityIntent.putExtra(EXTRA_QUESTION_NAME, questionOwner.getDisplayName());
             answerActivityIntent.putExtra(EXTRA_QUESTION_DATE,
                     DateUtil.toNormalDate(currentQuestion.getCreationDate()));
             answerActivityIntent.putExtra(EXTRA_QUESTION_FULL_TEXT, currentQuestion.getBody());
             answerActivityIntent.putExtra(EXTRA_AVATAR_ADDRESS, questionOwner.getProfileImage());
-            answerActivityIntent.putExtra(EXTRA_QUESTION_ANSWERS_COUNT, currentQuestion.getAnswerCount());
+            //answerActivityIntent.putExtra(EXTRA_QUESTION_ANSWERS_COUNT, currentQuestion.getAnswerCount());
             answerActivityIntent.putExtra(EXTRA_QUESTION_ID, currentQuestion.getQuestionId());
             answerActivityIntent.putExtra(EXTRA_QUESTION_VOTES_COUNT, currentQuestion.getScore());
             answerActivityIntent.putExtra(EXTRA_QUESTION_OWNER_LINK, questionOwner.getLink());
 
-            startActivity(answerActivityIntent);
+            //startActivity(answerActivityIntent);
             requireActivity().overridePendingTransition(R.anim.fade_in_anim, R.anim.fade_out_anim);
         };
         handleRecyclerView();

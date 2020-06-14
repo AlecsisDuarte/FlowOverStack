@@ -28,27 +28,9 @@
         <action
             android:id="@+id/action_activity_dest_to_search_dest"
             app:destination="@id/search_dest"/>
-    </fragment>
-
-    <fragment
-        android:id="@+id/recent_dest"
-        android:name="com.josycom.mayorjay.flowoverstack.ui.QuestionsByCreationFragment"
-        android:label="recent_fragment"
-        tools:layout="@layout/fragment_questions_by_creation">
-    </fragment>
-
-    <fragment
-        android:id="@+id/hot_dest"
-        android:name="com.josycom.mayorjay.flowoverstack.ui.QuestionsByHotFragment"
-        android:label="hot_fragment"
-        tools:layout="@layout/fragment_questions_by_hot">
-    </fragment>
-
-    <fragment
-        android:id="@+id/vote_dest"
-        android:name="com.josycom.mayorjay.flowoverstack.ui.QuestionsByVoteFragment"
-        android:label="vote_fragment"
-        tools:layout="@layout/fragment_questions_by_vote">
+        <action
+            android:id="@+id/action_activity_dest_to_answerFragment"
+            app:destination="@id/answer_dest" />
     </fragment>
 
     <fragment
@@ -56,6 +38,14 @@
         android:name="com.josycom.mayorjay.flowoverstack.ui.SearchFragment"
         android:label="search_fragment"
         tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_search_dest_to_answer_dest"
+            app:destination="@id/answer_dest" />
     </fragment>
+    <fragment
+        android:id="@+id/answer_dest"
+        android:name="com.josycom.mayorjay.flowoverstack.ui.AnswerFragment"
+        android:label="fragment_answer"
+        tools:layout="@layout/fragment_answer" />
 
 </navigation>

@@ -36,7 +36,7 @@
     <fragment
         android:id="@+id/search_dest"
         android:name="com.josycom.mayorjay.flowoverstack.ui.SearchFragment"
-        android:label="search_fragment"
+        android:label="@string/action_search"
         tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_search_dest_to_answer_dest"
@@ -45,7 +45,7 @@
     <fragment
         android:id="@+id/answer_dest"
         android:name="com.josycom.mayorjay.flowoverstack.ui.AnswerFragment"
-        android:label="fragment_answer"
+        android:label="@string/read_more"
         tools:layout="@layout/fragment_answer" />
 
 </navigation>

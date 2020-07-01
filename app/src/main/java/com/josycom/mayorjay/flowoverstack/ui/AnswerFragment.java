@@ -56,13 +56,13 @@ public class AnswerFragment extends Fragment {
             markdownView.setMarkDownText(getArguments().getString(StringConstants.EXTRA_QUESTION_FULL_TEXT));
             tvDateQuestionDetail.setText(getArguments().getString(StringConstants.EXTRA_QUESTION_DATE));
             tvNameQuestionDetail.setText(getArguments().getString(StringConstants.EXTRA_QUESTION_NAME));
-            int voteCount = getArguments().getInt(StringConstants.EXTRA_QUESTION_VOTES_COUNT, 0);
+            int voteCount = getArguments().getInt(StringConstants.EXTRA_QUESTION_VOTES_COUNT);
             if (voteCount <= 0){
                 tvVotesCountItem.setText(String.valueOf(voteCount));
             } else {
                 tvVotesCountItem.setText(getString(R.string.plus_score).concat(String.valueOf(voteCount)));
             }
-            questionId = getArguments().getInt(StringConstants.EXTRA_QUESTION_ID, 0);
+            questionId = getArguments().getInt(StringConstants.EXTRA_QUESTION_ID);
             String avatarAddress = getArguments().getString(StringConstants.EXTRA_AVATAR_ADDRESS);
             mOwnerQuestionLink = getArguments().getString(StringConstants.EXTRA_QUESTION_OWNER_LINK);
             Glide.with(requireActivity())

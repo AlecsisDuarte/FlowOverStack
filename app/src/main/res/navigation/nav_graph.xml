@@ -46,6 +46,14 @@
         android:id="@+id/answer_dest"
         android:name="com.josycom.mayorjay.flowoverstack.ui.AnswerFragment"
         android:label="@string/read_more"
-        tools:layout="@layout/fragment_answer" />
+        tools:layout="@layout/fragment_answer" >
+        <action
+            android:id="@+id/action_answer_dest_to_webViewFragment"
+            app:destination="@id/web_view_dest" />
+    </fragment>
+    <fragment
+        android:id="@+id/web_view_dest"
+        android:name="com.josycom.mayorjay.flowoverstack.ui.WebViewFragment"
+        tools:layout="@layout/fragment_web_view" />
 
 </navigation>
